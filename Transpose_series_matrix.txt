@@ -1,0 +1,21 @@
+import pandas as pd
+
+# === Set input and output paths ===
+input_file = "C:/Users/menna/OneDrive/Documents/IU LUDDY BIOINFORMATICS/Machine learning/Project/Dataset/GSE25066_series_matrix.csv"
+output_file = "C:/Users/menna/OneDrive/Documents/IU LUDDY BIOINFORMATICS/Machine learning/Project/Dataset/GSE25066_series_matrix_transposed.csv"
+
+# === Step 1: Load the CSV ===
+df = pd.read_csv(input_file, header=None)
+
+# === Step 2: Transpose ===
+df_transposed = df.T
+
+# === Step 3: Use first row as header ===
+df_transposed.columns = df_transposed.iloc[0]
+df_transposed = df_transposed[1:]  # drop the header row now used as column names
+df_transposed.reset_index(drop=True, inplace=True)
+
+# === Step 4: Save the transposed file ===
+df_transposed.to_csv(output_file, index=False)
+
+print(f"✅ Transposed file saved as: {output_file}")
